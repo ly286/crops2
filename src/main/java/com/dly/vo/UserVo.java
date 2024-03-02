@@ -1,11 +1,11 @@
 package com.dly.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class UserVo implements Serializable {
@@ -22,7 +22,7 @@ public class UserVo implements Serializable {
     //用户性别
     private Integer status;
     //用户创建时间
-    @TableField(value = "created")
+    //created
     private LocalDateTime createTime;
     //用户最后登录时间
     private LocalDateTime lastLogin;

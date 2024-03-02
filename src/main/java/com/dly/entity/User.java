@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -26,9 +27,9 @@ public class User implements Serializable {
 
     private Integer status;
 
-    private Date created;
+    private LocalDateTime created;
 
-    private Date lastLogin;
+    private LocalDateTime lastLogin;
 
     private static final long serialVersionUID = 1L;
 }

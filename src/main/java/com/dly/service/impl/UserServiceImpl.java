@@ -30,6 +30,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //2. 将用户信息封装到vo
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(user, userVo);
+        //无法直接copy时间戳为字符串
+        //userVo.setCreateTime(user.getCreated().toString()); // 将 LocalDateTime 转换为字符串
         return userVo;
     }
 
