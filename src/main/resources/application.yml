@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://${ly.datasource.host}:${ly.datasource.port}/${ly.datasource.database}?useUnicode=true&characterEncoding=UTF-8
+    username: ${ly.datasource.username}
+    password: ${ly.datasource.password}
+    driver-class-name: ${ly.datasource.driver-class-name}
+
