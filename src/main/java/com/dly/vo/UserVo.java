@@ -17,8 +17,6 @@ public class UserVo implements Serializable {
     private String avatar;
     //用户邮箱
     private String email;
-    //用户密码
-    private String password;
     //用户性别
     private Integer status;
     //用户创建时间
