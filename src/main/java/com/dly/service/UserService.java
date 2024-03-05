@@ -13,4 +13,6 @@ public interface UserService extends IService<User> {
 
 
     UserVo getByIdVo(Long id);
+
+    User getUserByName(String username);
 }

@@ -1,5 +1,6 @@
 package com.dly.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dly.entity.User;
 import com.dly.service.UserService;
@@ -35,7 +36,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userVo;
     }
 
-
+    @Override
+    public User getUserByName(String username) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("username", username);
+        User user = userMapper.selectOne(userQueryWrapper);
+        return user;
+    }
 }
 
 
