@@ -2,6 +2,7 @@ package com.dly.service;
 
 import com.dly.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dly.result.Result;
 import com.dly.vo.UserVo;
 
 /**
@@ -15,4 +16,6 @@ public interface UserService extends IService<User> {
     UserVo getByIdVo(Long id);
 
     User getUserByName(String username);
+
+    Result login(String username, String password);
 }

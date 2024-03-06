@@ -3,14 +3,19 @@ package com.dly.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dly.entity.User;
+import com.dly.result.Result;
 import com.dly.service.UserService;
 import com.dly.mapper.UserMapper;
+import com.dly.util.BcryptUtil;
+import com.dly.util.JwtUtil;
+import com.dly.util.RedisUtil;
 import com.dly.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author dly
@@ -22,6 +27,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    private RedisUtil redisUtil;
+
 
 
     @Override
@@ -42,6 +52,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userQueryWrapper.eq("username", username);
         User user = userMapper.selectOne(userQueryWrapper);
         return user;
+    }
+
+    @Override
+    public Result login(String username, String password) {
+        // 先从数据库查询
+        User user = this.getOne(new QueryWrapper<User>().eq("username", username));
+        if (null == user) {
+            Result.error("用户不存在");
+        }
+        if (!BcryptUtil.match(password, user.getPassword())) {
+            return Result.error("密码错误");
+        }
+        String jwtToken = jwtUtil.createJwtToken(user.getId().toString(), 10 * 10);
+        redisUtil.set("token_" + jwtToken, user, 60 * 10, TimeUnit.SECONDS);
+        return Result.success(jwtToken);
     }
 }
 
