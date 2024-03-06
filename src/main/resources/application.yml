@@ -9,4 +9,9 @@ spring:
     username: ${ly.datasource.username}
     password: ${ly.datasource.password}
     driver-class-name: ${ly.datasource.driver-class-name}
-
+  data:
+    redis:
+      host: ${ly.redis.host}
+      port: ${ly.redis.port}
+      password: ${ly.redis.password}
+      database: ${ly.redis.database}

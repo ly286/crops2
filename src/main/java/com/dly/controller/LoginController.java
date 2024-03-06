@@ -1,7 +1,9 @@
 package com.dly.controller;
 
+import com.dly.entity.User;
 import com.dly.result.Result;
 import com.dly.service.UserService;
+import com.dly.util.BcryptUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +45,16 @@ public class LoginController {
         return userService.login(username, password);
     }
 
-    @GetMapping("login")
-    public Object getUser() {
-        return SecurityUtils.getSubject();
+    @PostMapping("/register")
+    @Operation(summary = "注册接口", description = "注册")
+    public Result<User> register(@RequestBody User user) {
+        user.setPassword(BcryptUtil.encode(user.getPassword()));
+        userService.save(user);
+        return Result.success(user);
     }
+
+//    @GetMapping("login")
+//    public Object getUser() {
+//        return SecurityUtils.getSubject();
+//    }
 }
