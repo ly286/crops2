@@ -59,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 先从数据库查询
         User user = this.getOne(new QueryWrapper<User>().eq("username", username));
         if (null == user) {
-            Result.error("用户不存在");
+            return Result.error("用户不存在");
         }
         if (!BcryptUtil.match(password, user.getPassword())) {
             return Result.error("密码错误");

@@ -81,7 +81,7 @@ public class ShiroConfig {
         //map.put("/index.jsp", "authc");
         map.put("login", "anon");
         map.put("register", "anon");
-        //map.put("/user/**", "anon");
+        map.put("/user/**", "authc");
         //map.put("/login.jsp","anon");
         map.put("/**", "jwt");   // 所有请求通过我们自己的过滤器
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);

@@ -28,6 +28,8 @@ public enum ResultCodeEnum {
     PARAM_DUPLICATE("3004", "参数重复"),
     PARAM_CONVERT_ERROR("3005", "参数转化错误"),
 
+    EMATL_FORMAT_ERROR("3006", "邮箱格式不正确"),
+
     AUTHORITY_ERROR("4000", "权限错误"),
     AUTHORITY_UNAUTHORIZED("4001", "无权限"),
 

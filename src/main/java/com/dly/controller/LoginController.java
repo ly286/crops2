@@ -12,6 +12,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -47,7 +48,7 @@ public class LoginController {
 
     @PostMapping("/register")
     @Operation(summary = "注册接口", description = "注册")
-    public Result<User> register(@RequestBody User user) {
+    public Result<User> register(@Validated @RequestBody User user) {
         user.setPassword(BcryptUtil.encode(user.getPassword()));
         userService.save(user);
         return Result.success(user);

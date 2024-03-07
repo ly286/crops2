@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -23,10 +25,13 @@ public class User implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    @NotBlank(message = "用户名不为空")
     private String username;
 
     private String avatar;
 
+    @NotBlank(message = "邮箱不为空")
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     private String password;
