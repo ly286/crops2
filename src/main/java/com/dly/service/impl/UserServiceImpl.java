@@ -34,7 +34,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RedisUtil redisUtil;
 
 
-
     @Override
     public UserVo getByIdVo(Long id) {
         //1. 通过id查询用户
@@ -65,8 +64,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!BcryptUtil.match(password, user.getPassword())) {
             return Result.error(MessageConstant.PASSWORD_ERROR);
         }
-        String jwtToken = jwtUtil.createJwtToken(user.getId().toString(), 10 * 10);
-        redisUtil.set("token_" + jwtToken, user, 60 * 10, TimeUnit.SECONDS);
+        String jwtToken = jwtUtil.createJwtToken(user.getId().toString(), 60 * 60 * 2);
+        redisUtil.set("token_" + jwtToken, user, 60 * 60 * 2, TimeUnit.SECONDS);
         return Result.success(jwtToken);
     }
 }

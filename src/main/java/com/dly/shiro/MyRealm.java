@@ -58,12 +58,14 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) {
         // 获取token信息
         String token = (String) authenticationToken.getCredentials();
+        // 去除 "Bearer " 前缀
+        String actualToken = token.replace("Bearer ", "");
         // 校验token：未校验通过或者已过期
-        if (!jwtUtil.verifyToken(token) || jwtUtil.isExpire(token)) {
+        if (!jwtUtil.verifyToken(actualToken) || jwtUtil.isExpire(actualToken)) {
             throw new AuthenticationException("token已失效，请重新登录");
         }
         // 用户信息
-        User user = (User) redisUtil.get("token_" + token);
+        User user = (User) redisUtil.get("token_" + actualToken);
         if (null == user) {
             throw new UnknownAccountException("用户不存在");
         }
