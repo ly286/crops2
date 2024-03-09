@@ -3,6 +3,7 @@ package com.dly.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dly.entity.User;
+import com.dly.enums.MessageConstant;
 import com.dly.result.Result;
 import com.dly.service.UserService;
 import com.dly.mapper.UserMapper;
@@ -59,10 +60,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 先从数据库查询
         User user = this.getOne(new QueryWrapper<User>().eq("username", username));
         if (null == user) {
-            return Result.error("用户不存在");
+            return Result.error(MessageConstant.ACCOUNT_NOT_FOUND);
         }
         if (!BcryptUtil.match(password, user.getPassword())) {
-            return Result.error("密码错误");
+            return Result.error(MessageConstant.PASSWORD_ERROR);
         }
         String jwtToken = jwtUtil.createJwtToken(user.getId().toString(), 10 * 10);
         redisUtil.set("token_" + jwtToken, user, 60 * 10, TimeUnit.SECONDS);
