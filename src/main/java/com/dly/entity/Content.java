@@ -9,17 +9,18 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * @TableName m_blog
+ * @TableName m_content
  */
-@TableName(value ="m_blog")
+@TableName(value ="m_content")
 @Data
-public class Blog implements Serializable {
-    @TableId(type = IdType.AUTO)
+public class Content implements Serializable {
     private Long id;
 
     private Long userId;
 
     private String title;
+
+    private String img;
 
     private String description;
 
@@ -28,6 +29,8 @@ public class Blog implements Serializable {
     private Date created;
 
     private Integer status;
+
+    private Long liulan;
 
     private static final long serialVersionUID = 1L;
 }

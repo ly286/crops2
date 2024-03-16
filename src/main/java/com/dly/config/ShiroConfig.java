@@ -79,9 +79,9 @@ public class ShiroConfig {
         // 配置系统受限资源
         Map<String, String> map = new HashMap<String, String>();
         //map.put("/index.jsp", "authc");
-        map.put("login", "anon");
-        map.put("register", "anon");
-        map.put("/user/**", "authc");
+        map.put("/login", "anon");
+        map.put("/register", "anon");
+//        map.put("/user/**", "authc");
         //map.put("/login.jsp","anon");
         map.put("/**", "jwt");   // 所有请求通过我们自己的过滤器
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
