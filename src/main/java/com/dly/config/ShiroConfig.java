@@ -69,7 +69,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
 
 //        // 默认认证界面路径---当认证不通过时跳转
-//        shiroFilterFactoryBean.setLoginUrl("/login.jsp");
+        shiroFilterFactoryBean.setLoginUrl("/login");
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();
@@ -81,6 +81,7 @@ public class ShiroConfig {
         //map.put("/index.jsp", "authc");
         map.put("/login", "anon");
         map.put("/register", "anon");
+        map.put("/oss/**", "anon");
 //        map.put("/user/**", "authc");
         //map.put("/login.jsp","anon");
         map.put("/**", "jwt");   // 所有请求通过我们自己的过滤器

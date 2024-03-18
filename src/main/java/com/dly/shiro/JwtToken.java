@@ -1,6 +1,7 @@
 package com.dly.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 通过这个类将 string 的 token 转成 AuthenticationToken，shiro 才能接收

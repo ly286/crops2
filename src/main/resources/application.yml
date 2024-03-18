@@ -15,3 +15,11 @@ spring:
       port: ${ly.redis.port}
       password: ${ly.redis.password}
       database: ${ly.redis.database}
+jwt:
+  secret: ${ly.jwt.secret}
+
+minio:
+  endpoint: ${ly.minio.endpoint}
+  accessKey: ${ly.minio.accessKey}
+  secretKey: ${ly.minio.secretKey}
+  bucketName: ${ly.minio.bucketName}
